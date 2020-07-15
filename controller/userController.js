@@ -27,11 +27,14 @@ export const postLogin = (req, res) => {
     res.redirect(routes.home);
 }
 
+
+export const logout = (req, res) => {
+    res.redirect(routes.home)
+}
 export const editProfile = (req, res) => 
     res.render("editProfile", {pageTitle:'editProfile'})
 export const changePassword = (req, res) => 
     res.render("changePassword", {pageTitle:'changePassword'})
 export const userDetail = (req, res) => 
     res.render("userDetail", {pageTitle:'userDetail'})
-export const logout = (req, res) => 
-    res.send("Logout");
+
