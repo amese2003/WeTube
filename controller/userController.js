@@ -80,7 +80,7 @@ export const logout = (req, res) => {
     res.redirect(routes.home)
 }
 
-export const me = (req, res) => {
+export const getMe = (req, res) => {
     res.render("userDetail", {pageTitle:'userDetail', user : req.user});
 }
 
