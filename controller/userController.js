@@ -88,6 +88,12 @@ export const editProfile = (req, res) =>
     res.render("editProfile", {pageTitle:'editProfile'})
 export const changePassword = (req, res) => 
     res.render("changePassword", {pageTitle:'changePassword'})
-export const userDetail = (req, res) => 
-    res.render("userDetail", {pageTitle:'userDetail'})
-
+export const userDetail = async (req, res) => {
+    const { params : {id} } = req;
+    try{
+        const user = await User.findById(id);
+        res.render("userDetail", {pageTitle:'userDetail'});
+    } catch (error){
+        res.redirect(routes.home);
+    }
+}
