@@ -13,8 +13,6 @@ const CHANGE_PASSWORD = "/change-password";
 const ME = "/me"
 
 
-
-
 //Videos
 const VIDEOS = "/videos";
 const UPLOAD = "/upload";
@@ -41,10 +39,10 @@ const routes = {
         }
     },
     editProfile: EDIT_PROFILE,
-    ChangePassword: CHANGE_PASSWORD,
+    changePassword: CHANGE_PASSWORD,
     videos: VIDEOS,
     upload: UPLOAD,
-    videoDetail: (id) => {
+    videoDetail: (id) => {        
         if(id){
             return `/videos/${id}`
         } else{
@@ -52,6 +50,7 @@ const routes = {
         }
     },
     editVideo: (id) => {
+        console.log(id);
         if(id){
             return `/videos/${id}/edit`;
         } else{

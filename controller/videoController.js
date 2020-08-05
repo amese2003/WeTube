@@ -1,5 +1,6 @@
 import routes from "../routes"
 import Video from "../models/Video";
+import userRouter from "../routers/userRouter";
 
 export const home = async (req,res) => {    
     try{
@@ -40,10 +41,11 @@ export const postUpload = async (req, res) => {
     const newVideo = await Video.create({
         fileUrl: path,
         title,
-        description
+        description,
+        creator: req.user.id
     })
-
-    console.log(newVideo)
+    req.user.videos.push(newVideo.id);
+    req.user.save();
     res.redirect(routes.videoDetail(newVideo.id));
     //To Do: Upload and save Video
     //res.redirect(routes.videoDetail(121212))
@@ -54,7 +56,7 @@ export const videoDetail = async (req, res) => {
     } = req;
 
     try{
-        const video = await Video.findById(id);
+        const video = await Video.findById(id).populate("creator");
         res.render("videoDetail", { pageTitle: video.title , video});
     } catch(error){
         res.redirect(routes.home);
@@ -62,7 +64,7 @@ export const videoDetail = async (req, res) => {
 }
 export const getEditVideo = async (req, res) => {
     const {
-        params: {id}
+        params: { id }
     } = req;
 
     try{
@@ -71,8 +73,6 @@ export const getEditVideo = async (req, res) => {
     } catch(error){
         res.redirect(routes.home);
     }
-
-    res.render("editVideo", { pageTitle:'Edit Video'});
 }
 
 export const postEditVideo = async (req, res) => {
