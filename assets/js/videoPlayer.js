@@ -32,7 +32,12 @@ function setTotalTime(){
 }
 
 function getCurrentTime(){
-    currentTime.innerHTML = formatDate(videoPlayer.currentTime);
+    currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
+}
+
+function handleEnded(){
+    videoPlayer.currentTime = 0;
+    playBtn.innerHTML = `<i class="fas fa-play"></i>`;
 }
 
 
@@ -41,6 +46,7 @@ function init(){
     volumeBtn.addEventListener("click", handleVolumeClick);
     fullScreenBtn.addEventListener("click", goFullScreen);
     videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+    videoPlayer.addEventListener("ended", handleEnded);
 }
 
 function exitFullScreen(){
