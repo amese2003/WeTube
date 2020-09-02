@@ -7,6 +7,13 @@ const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
 
+const registerView = () => {
+    const videoId = window.location.href.split("/videos/")[1];
+    fetch(`/api/${videoId}/view`, {
+        method: "POST"
+    });
+};
+
 const formatDate = seconds => {
     const secondsNumber = parseInt(seconds, 10);
     let hours = Math.floor(secondsNumber / 3600);
@@ -36,9 +43,10 @@ function getCurrentTime(){
     currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
 }
 
-function handleEnded(){
+function handleEnded(){    
     videoPlayer.currentTime = 0;
     playBtn.innerHTML = `<i class="fas fa-play"></i>`;
+    registerView();
 }
 
 function handleDrag(event){
@@ -58,12 +66,13 @@ function handleDrag(event){
 
 
 function init(){
+    videoPlayer.volume = 0.5;
     playBtn.addEventListener("click", handlePlayClick)
     volumeBtn.addEventListener("click", handleVolumeClick);
     fullScreenBtn.addEventListener("click", goFullScreen);
     videoPlayer.addEventListener("loadedmetadata", setTotalTime);
     videoPlayer.addEventListener("ended", handleEnded);
-    volumeRange.addEventListener("input", handleDrag);
+    volumeRange.addEventListener("input", handleDrag);        
 }
 
 function exitFullScreen(){
@@ -120,9 +129,6 @@ function handlePlayClick(){
         playBtn.innerHTML = `<i class="fas fa-play"></i>`;
     }
 }
-
-
-
 
 if(videoContainer){
     init();
