@@ -14,23 +14,46 @@
         transition: opacity 0.4s linear;
         color: white;
         position: absolute;
-        bottom : 5px;
+        bottom : 0px;
         width: 100%;
         background-color: rgba(0,0,0,0.5);
         padding: 10px;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        // grid-template-columns: repeat(5, 1fr);     
+        //grid-auto-rows: 2;
+        grid-template-columns: repeat(4, 1fr);
         font-size: 16px;
         .videoPlayer__column:first-child{
-            display: flex;
-            align-self: center;
+            justify-self: center;
+            align-self: center;  
+            grid-column: 1/4;
+            grid-row: 1;
+            width: 100%;
+        }   
+        .videoPlayer__column:nth-child(2){
+            justify-self: start;            
+            align-self: center;            
+            grid-row: 2;
+            grid-column: 1;
+        }
+        .videoPlayer__column:nth-child(3){
+            grid-row: 2;
+            grid-column: 2;
             #jsVolumeBtn{
                 margin-right: 10px;
-            }
+            }            
             span:last-child{
                 bottom: 0px;
             }
         }
+        .videoPlayer__column:nth-child(4){
+            display: flex;
+            justify-self: start;      
+            align-self: center;      
+            grid-row: 2;
+            grid-column: 3;
+            
+        }                  
         .videoPlayer__volume{
             position: absolute;
             padding: 0;
@@ -40,7 +63,6 @@
             transform: rotate(-90deg);
             z-index: 10;
             width: 80px;
-
             input{
                 background-color: rgba(0,0,0,0.7);
                 &::-webkit-slider-runnable-track{
@@ -58,12 +80,12 @@
                 }
             }
         }
+        
         .videoPlayer__column:last-child {
             justify-self: end;
-        }
-        .videoPlayer__column:nth-child(2){
-            justify-self: center;
-        }
+            grid-row: end;
+            grid-column: end;
+        }        
         i{
             font-size: 25px;
             cursor: pointer;

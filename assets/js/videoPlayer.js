@@ -6,6 +6,7 @@ const fullScreenBtn = document.getElementById("jsFullScreen")
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
+const progressRange = document.getElementById("jsProgressbar");
 
 const registerView = () => {
     const videoId = window.location.href.split("/videos/")[1];
@@ -41,6 +42,7 @@ function setTotalTime(){
 
 function getCurrentTime(){
     currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
+    progressRange.value = videoPlayer.currentTime / videoPlayer.duration;
 }
 
 function handleEnded(){    
@@ -64,6 +66,13 @@ function handleDrag(event){
     }
 }
 
+function progressHandleDrag(event) {
+    const {
+        target: {value}
+    } = event;
+    videoPlayer.currentTime = value * videoPlayer.duration;
+}
+
 
 function init(){
     videoPlayer.volume = 0.5;
@@ -72,7 +81,8 @@ function init(){
     fullScreenBtn.addEventListener("click", goFullScreen);
     videoPlayer.addEventListener("loadedmetadata", setTotalTime);
     videoPlayer.addEventListener("ended", handleEnded);
-    volumeRange.addEventListener("input", handleDrag);        
+    volumeRange.addEventListener("input", handleDrag);      
+    progressRange.addEventListener("input", progressHandleDrag);  
 }
 
 function exitFullScreen(){
@@ -126,6 +136,7 @@ function handlePlayClick(){
         playBtn.innerHTML = `<i class="fas fa-pause"></i>`;
     }else{
         videoPlayer.pause();
+        console.log(interval);
         playBtn.innerHTML = `<i class="fas fa-play"></i>`;
     }
 }
