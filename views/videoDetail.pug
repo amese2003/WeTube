@@ -27,7 +27,9 @@ block content
             form.add__comment#jsAddCommnet
                 input(type="text", placeholder = "Add a commnet")
             ul.video__comments-list
-                each comment in video.commnets
-                    span comment.text
+                each comment in video.comments
+                    li
+                        span=comment.text
+                    
         
                 
