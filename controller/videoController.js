@@ -39,6 +39,8 @@ export const postUpload = async (req, res) => {
         file:{  path    }
     } = req;
 
+    console.log(req);
+
     const newVideo = await Video.create({
         fileUrl: path,
         title,
@@ -132,6 +134,8 @@ export const postRegisterView = async (req, res) => {
         params: {id}
     } = req;
 
+    
+
     try{
         const video = await Video.findById(id)
         video.views += 1;
@@ -152,6 +156,8 @@ export const postAddComment = async(req, res) => {
         user
     } = req;
 
+    console.log(req);
+
     try{
         const video = await Video.findById(id);
         const newComment = await Comment.create({
@@ -159,9 +165,35 @@ export const postAddComment = async(req, res) => {
             creator: user.id
         });
         video.comments.push(newComment.id);
+        console.log(newComment.id);
         video.save();
-
+        res.status(200);
+        res.redirect(routes.videoDetail(id));
     } catch(error){
+        res.status(400);
+    } finally {
+        res.end();
+    }
+}
+
+export const postRemoveComment = async (req, res) => {
+
+    console.log(req);
+    
+    const {
+        params: {id},
+        body: { commentId }
+    } = req;
+
+    
+    
+    try {
+        await Comment.remove({ _id : commentId });
+        const video = await Video.findById(id)        
+        video.comments.pull(commentId);
+        video.save();
+    } catch (error) {
+        console.log(error);
         res.status(400);
     } finally {
         res.end();
