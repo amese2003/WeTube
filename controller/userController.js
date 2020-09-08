@@ -62,7 +62,7 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
             name,
             githubId: id,
             avatarUrl
-        });
+        });        
         return cb(null, newUser);
 
     }catch(error){

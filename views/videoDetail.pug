@@ -32,8 +32,16 @@ block content
                 input(type="text", placeholder = "Add a commnet")
             ul.video__comments-list#jsCommentList
                 each comment in video.comments.reverse()
-                    li
+                    li(id=`${comment.id}`)
                         span=comment.text
+                            if loggedUser && comment.creator == loggedUser.id                       
+                                i.fas.fa-times
+                            
+                            
+                        
+                            
+                            
+                                
                     
         
                 

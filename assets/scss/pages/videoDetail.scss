@@ -56,6 +56,13 @@
                 &:not(:last-child){
                     margin-bottom: 15px;
                 }
+                i {
+                    &:not(:last-child) {
+                      margin-right: 10px;
+                    }
+                    font-size: 20px;
+                    cursor: pointer;
+                }                
             }
         }
     }
