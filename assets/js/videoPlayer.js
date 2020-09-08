@@ -136,7 +136,6 @@ function handlePlayClick(){
         playBtn.innerHTML = `<i class="fas fa-pause"></i>`;
     }else{
         videoPlayer.pause();
-        console.log(interval);
         playBtn.innerHTML = `<i class="fas fa-play"></i>`;
     }
 }

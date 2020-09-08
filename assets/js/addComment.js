@@ -16,6 +16,7 @@ const increaseNumber = () => {
     commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
 };
 
+
 const sendComment = async (comment) => {
     const videoId = window.location.href.split("/videos/")[1];
     const response = await axios({
@@ -24,8 +25,7 @@ const sendComment = async (comment) => {
         data: {
             comment
         }        
-    });
-    console.log(response);
+    });    
 
     if(response.status === 200){
         addComment(comment);
@@ -34,6 +34,7 @@ const sendComment = async (comment) => {
 
 const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(event);
     const commentInput = addCommentForm.querySelector("input");
     const comment = commentInput.value;
     sendComment(comment);
