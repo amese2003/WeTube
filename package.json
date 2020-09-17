@@ -6,6 +6,7 @@
   "author": "Yong Ju Kwak",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.11.6",
     "@babel/core": "^7.10.4",
     "@babel/node": "^7.10.4",
     "@babel/polyfill": "^7.10.4",
@@ -40,9 +41,15 @@
     "webpack-cli": "^3.3.12"
   },
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore '.scss' --ignore 'static'",
-    "dev:assets": "cross-env WEBPACK_ENV=development webpack -w",
-    "build:assets": "cross-env WEBPACK_ENV=production webpack"
+    "dev:server": "nodemon --exec babel-node src/init.js --delay 2 --ignore '.scss' --ignore 'static'",
+    "dev:assets": "cd src && cross-env WEBPACK_ENV=development webpack -w",
+    "build:assets": "cd src && cross-env WEBPACK_ENV=production webpack",
+    "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
+    "copyAll": "shx cp -r src/static build && shx cp -r src/views build",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "shx rm -rf build",
+    "tunnel": "lt --port 4000",
+    "start": "node build/init.js"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
@@ -50,6 +57,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "nodemon": "^2.0.4",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "shx": "^0.3.2"
   }
 }
