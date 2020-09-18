@@ -18,6 +18,7 @@
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.5",
+    "cross-env": "^7.0.2",
     "css-loader": "^3.6.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -37,6 +38,7 @@
     "postcss-loader": "^3.0.0",
     "pug": "^3.0.0",
     "sass-loader": "^9.0.2",
+    "shx": "^0.3.2",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   },
@@ -53,12 +55,10 @@
     "prestart": "npm run build"
   },
   "devDependencies": {
-    "cross-env": "^7.0.2",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "nodemon": "^2.0.4",
-    "prettier": "^2.0.5",
-    "shx": "^0.3.2"
+    "prettier": "^2.0.5"
   }
 }
